@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Camera Dashboard</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+body{
+    font-family: Arial;
+    margin:0;
+    background:#f4f6f9;
+}
+
+.header{
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    color:white;
+    padding:15px;
+    display:flex;
+    justify-content:space-between;
+}
+
+.container{
+    padding:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+button{
+    padding:8px 15px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.start{
+    background:#28a745;
+    color:white;
+}
+
+.stop{
+    background:#ffc107;
+}
+
+.delete{
+    background:red;
+    color:white;
+}
+
+.logout{
+    background:white;
+    color:black;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+td,th{
+    padding:10px;
+    border-bottom:1px solid #ddd;
+}
+
+video{
+    width:100%;
+    margin-top:10px;
+    border-radius:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<div class="header">
+
+<h2>Camera Management Dashboard</h2>
+
+<button onclick="logout()" class="logout">
+Logout
+</button>
+
+</div>
+
+
+
+<div class="container">
+
+
+<div class="card">
+
+<h3>Cameras</h3>
+
+<table>
+
+<thead>
+<tr>
+
+<th>ID</th>
+<th>Name</th>
+<th>Location</th>
+<th>Actions</th>
+
+</tr>
+</thead>
+
+<tbody id="cameraTable"></tbody>
+
+</table>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>Recording Controls</h3>
+
+<button onclick="stopRecording()" class="stop">
+Stop Recording
+</button>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>Recordings</h3>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Camera ID</th>
+<th>Play</th>
+<th>Delete</th>
+
+</tr>
+
+</thead>
+
+<tbody id="recordingsTable"></tbody>
+
+</table>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Video Player</h3>
+
+<video id="videoPlayer" controls></video>
+
+</div>
+
+
+</div>
+
+
+
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>
