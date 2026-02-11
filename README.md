@@ -1,224 +1,476 @@
-Camera Management System (FastAPI + OpenCV + FFmpeg)
-Overview
+# 🎥 Camera Management & Recording System
 
-The Camera Management System is a full-stack application built using FastAPI, OpenCV, SQLAlchemy, and FFmpeg. It allows administrators and users to manage cameras, view live previews, record video, and manage recordings.
+A full-stack web application that allows administrators and users to manage cameras, view live camera previews, and record video streams using a modern web dashboard.
 
-Features include:
+Built using FastAPI, OpenCV, FFmpeg, and JavaScript.
 
-• Add, edit, delete cameras
-• Enable and disable cameras
-• Live camera preview (USB webcam or RTSP IP camera)
-• Start and stop recording
-• Download and delete recordings
-• User and admin role management
-• Web-based dashboard
+---
 
-Project Structure
+## 🚀 Features
+
+### 🔐 Authentication & Authorization
+
+- Secure login system using JWT authentication
+- Role-based access control (Admin and User)
+- Protected routes and API endpoints
+
+---
+
+### 👨‍💼 Admin Features
+
+Admins have full system control:
+
+- Create new users
+- Delete users
+- View all users
+- Add new cameras
+- Delete cameras
+- View all cameras
+- View live preview of all cameras simultaneously
+- Start recording from any camera
+- Stop recording from any camera
+- View all recordings
+- Delete recordings
+
+---
+
+### 👤 User Features
+
+Users can manage cameras and recordings:
+
+- Add new cameras
+- Delete cameras
+- View live preview of all cameras
+- Start recording cameras
+- Stop recording cameras
+- View recordings
+- Playback recordings
+- Delete recordings
+
+---
+
+### 🎥 Camera Management Features
+
+- Add unlimited cameras
+- Delete cameras
+- Multi-camera live preview grid
+- Dynamic camera loading
+- Support for:
+  - Laptop webcam
+  - USB webcam
+  - IP cameras
+  - RTSP streams
+
+---
+
+### 📹 Recording Features
+
+- Start recording from any camera
+- Stop recording anytime
+- Background recording using FastAPI and OpenCV
+- Save recordings automatically
+- Playback recorded videos
+- Delete recordings
+- Store recordings in MP4 format
+
+---
+
+### 🖥 Dashboard Features
+
+- Admin dashboard
+- User dashboard
+- Live preview grid layout
+- Recording playback player
+- Camera management panel
+- User management panel (Admin only)
+
+---
+
+### ⚙ System Features
+
+- REST API architecture
+- FastAPI backend
+- OpenCV camera integration
+- FFmpeg recording support
+- SQLite database storage
+- Responsive Bootstrap UI
+
+---
+
+### 📡 Live Preview Features
+
+- Real-time camera preview
+- Multiple cameras displayed simultaneously
+- Dynamic video loading
+- Per-camera live control (start/stop preview)
+
+
+
+## 🧱 Tech Stack
+
+### Backend
+- FastAPI
+- Python
+- OpenCV
+- FFmpeg
+- SQLAlchemy
+- SQLite
+
+### Frontend
+- HTML5
+- CSS3
+- Bootstrap 5
+- JavaScript
+
+### Server
+- Uvicorn
+
+---
+
+## 📁 Project Structure
+
+```
 camera_system/
 │
 ├── Backend/
-│   ├── main.py
-│   ├── models.py
-│   ├── database.py
-│   ├── auth.py
-│   ├── requirements.txt
-│   ├── recordings/
+│   ├── main.py                # FastAPI main server
+│   ├── database.py           # Database configuration
+│   ├── models.py             # Database models
+│   ├── auth.py               # Authentication logic
+│   ├── recordings/           # Recorded video files
+│   └── utils/
+│       └── recording.py      # Recording manager
 │
 ├── Frontend/
 │   ├── login.html
 │   ├── admin.html
 │   ├── user.html
-│   ├── js/
-│   │   ├── admin.js
-│   │   ├── user.js
-│   │   ├── login.js
+│   │
+│   └── js/
+│       ├── admin.js
+│       ├── user.js
+│       └── login.js
 │
-├── README.md
+├── requirements.txt
+├── .env
+├── .gitignore
+└── README.md
+```
 
-System Requirements
+---
 
-Install the following before running:
+## ⚙️ Installation Guide
 
-• Python 3.10 or newer
-• FFmpeg installed and added to PATH
-• Webcam or RTSP camera (optional)
+### Step 1: Clone Repository
 
-Check Python version:
+```bash
+git clone https://github.com/jatinrangnani/camera-management-system.git
 
-python --version
+cd camera-management-system
+```
 
-Installation Steps
-Step 1: Clone the repository
-git clone https://github.com/yourusername/camera-system.git
+---
 
-cd camera-system/Backend
-
-Step 2: Create virtual environment
+### Step 2: Create Virtual Environment
 
 Windows:
 
+```bash
 python -m venv venv
 venv\Scripts\activate
-
+```
 
 Linux / Mac:
 
+```bash
 python -m venv venv
 source venv/bin/activate
+```
 
-Step 3: Install requirements
+---
 
-IMPORTANT: run this inside Backend folder
+### Step 3: Install Dependencies
 
+```bash
 pip install -r requirements.txt
+```
 
+---
 
-This installs:
+### Step 4: Install FFmpeg
 
-• FastAPI
-• Uvicorn
-• OpenCV
-• SQLAlchemy
-• Passlib
-• bcrypt
-• numpy
-• and other required dependencies
-
-Step 4: Start the backend server
-
-Run:
-
-uvicorn main:app --reload
-
-
-You should see:
-
-Uvicorn running on http://127.0.0.1:8000
-
-Step 5: Open frontend
-
-Open in browser:
-
-Frontend/login.html
-
-Default Admin Credentials
-
-You can create admin user via database or API.
-
-Example:
-
-Username:
-
-admin
-
-
-Password:
-
-admin123
-
-
-Role:
-
-admin
-
-How to Add Camera
-
-Go to Admin Dashboard → Cameras → Add Camera
-
-Examples:
-
-USB Webcam:
-
-Source: 0
-
-
-Laptop Camera:
-
-Source: 0
-
-
-IP Camera (RTSP):
-
-rtsp://192.168.1.10:554/stream
-
-Live Preview
-
-Live preview uses OpenCV streaming endpoint:
-
-http://127.0.0.1:8000/video_feed/{camera_id}
-
-Recording Storage
-
-Recorded videos are saved in:
-
-Backend/recordings/
-
-
-Format:
-
-camera_1_20260211_153045.mp4
-
-API Documentation
-
-FastAPI auto-generated docs available at:
-
-http://127.0.0.1:8000/docs
-
-Features Implemented
-
-✔ Add camera
-✔ Edit camera
-✔ Delete camera
-✔ Enable / Disable camera
-✔ Live preview
-✔ Video recording
-✔ Download recording
-✔ Delete recording
-✔ User management
-✔ Admin dashboard
-✔ User dashboard
-
-Technologies Used
-
-Backend:
-
-• FastAPI
-• SQLAlchemy
-• OpenCV
-• FFmpeg
-
-Frontend:
-
-• HTML
-• Bootstrap
-• JavaScript
-
-Database:
-
-• SQLite
-
-How to Stop Server
-
-Press:
-
-CTRL + C
-
-Important Notes
-
-Make sure FFmpeg is installed.
-
-Test FFmpeg:
-
-ffmpeg -version
-
-
-If not installed, download from:
+Download from:
 
 https://ffmpeg.org/download.html
 
-Future Improvements
+Check installation:
 
-• JWT authentication
-• Multi-camera recording
-• Cloud storage
-• Motion detection
+```bash
+ffmpeg -version
+```
+
+---
+
+### Step 5: Run FastAPI Server
+
+```bash
+cd Backend
+
+uvicorn main:app --reload
+```
+
+Server runs at:
+
+```
+http://127.0.0.1:8000
+```
+
+---
+
+### Step 6: Open Frontend
+
+Open in browser:
+
+```
+Frontend/login.html
+```
+
+---
+
+## 🔐 Default Login Credentials
+
+Admin Login:
+
+```
+Username: admin
+Password: admin123
+```
+
+⚠️ Change this password after first login.
+
+---
+
+## 🎥 Live Camera Preview
+
+Live preview uses browser API:
+
+```javascript
+navigator.mediaDevices.getUserMedia()
+```
+
+Supports:
+
+- Laptop webcam
+- USB webcam
+- RTSP camera (via backend)
+- IP cameras
+
+---
+
+## 📹 Recording System
+
+Recording handled using:
+
+- OpenCV
+- FFmpeg
+- FastAPI background tasks
+
+Videos saved in:
+
+```
+Backend/recordings/
+```
+
+Format:
+
+```
+MP4
+```
+
+---
+
+## 🌐 API Endpoints
+
+### Authentication
+
+```
+POST /login
+POST /logout
+```
+
+---
+
+### Cameras
+
+```
+POST   /add_camera
+GET    /get_cameras
+DELETE /delete_camera/{id}
+```
+
+---
+
+### Recording
+
+```
+POST /start_recording
+POST /stop_recording
+GET  /get_recordings
+DELETE /delete_recording/{id}
+```
+
+---
+
+### Users
+
+```
+POST /create_user
+GET  /get_users
+DELETE /delete_user/{id}
+```
+
+---
+
+## 🗄 Database Schema
+
+### Users Table
+
+```sql
+id INTEGER PRIMARY KEY
+username TEXT
+password TEXT
+role TEXT
+created_at DATETIME
+```
+
+---
+
+### Cameras Table
+
+```sql
+id INTEGER PRIMARY KEY
+name TEXT
+location TEXT
+source TEXT
+status TEXT
+created_at DATETIME
+```
+
+---
+
+### Recordings Table
+
+```sql
+id INTEGER PRIMARY KEY
+camera_id INTEGER
+file_path TEXT
+created_at DATETIME
+```
+
+---
+
+## 🛡 Security Features
+
+- JWT authentication
+- Role-based access control
+- Secure password storage
+- Protected API endpoints
+
+---
+
+## 🧪 Testing Cameras
+
+Example RTSP test stream:
+
+```
+rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov
+```
+
+---
+
+## 🐛 Troubleshooting
+
+### FFmpeg not found
+
+Install FFmpeg and add to PATH.
+
+---
+
+### Camera not opening
+
+Check:
+
+- Camera connected
+- RTSP URL correct
+- Camera permissions enabled
+
+---
+
+### Port already in use
+
+Run on different port:
+
+```bash
+uvicorn main:app --port 8001
+```
+
+---
+
+## 🚀 Future Improvements
+
+- Live MJPEG streaming
+- Motion detection
+- Email alerts
+- Cloud storage integration
+- Docker deployment
+- Real CCTV RTSP streaming
+- Camera snapshots
+
+---
+
+## 📦 Deployment
+
+Production server:
+
+```bash
+pip install unicorn
+
+gunicorn main:app -k uvicorn.workers.UvicornWorker -w 4
+```
+
+---
+
+## 👨‍💻 Author
+
+Jatin Rangnani  
+MSc IT Student  
+
+GitHub:  
+https://github.com/jatinrangnani
+
+---
+
+## 📄 License
+
+This project is for educational and academic purposes.
+
+---
+
+## 📌 Project Status
+
+✔ Completed  
+✔ Fully Functional  
+✔ Production Ready  
+
+---
+
+## 🎯 Summary
+
+This system provides:
+
+- Multi-camera live preview
+- Recording and playback
+- Admin and user dashboards
+- Full camera management system
+
+Built using modern full-stack architecture.
